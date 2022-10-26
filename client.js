@@ -12,9 +12,20 @@ const connect = function() {
   });
   conn.on("connect", () => {
     console.log("Successfully connected to game server");
-    conn.write(" Name: HRP");
-  });
+    conn.write("Name: HRP");
+    let moves = ["up", "up", "left", "left", "left", "up", "up", "right", "right", "right", "right", "down", "down"];
+    let delay = 1000;
+    for (let item of moves) {
+      setTimeout(() => {
+        conn.write(`Move: ${item}`);
+      }, delay);
+      delay += 1000;
+    }
 
+    // setInterval(() => {
+    //   conn.write("Move: up");
+    // }, 2000);
+  });
   return conn;
 };
 module.exports = connect;
